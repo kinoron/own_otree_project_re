@@ -1,0 +1,154 @@
+{{ block title }}
+相手との取引
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    #new_comer {
+        display: none;
+    }
+    #old_friend {
+        display: none;
+    }
+    #waiting_opponent {
+        display: none;
+    }
+    #main_result {
+        display: none;
+    }
+
+</style>
+
+<body>
+    <div id="header">
+        <h1 id="new_comer">新しい相手と取引を始めます</h1>
+        <h1 id="old_friend">前の相手との取引を続けます</h1>
+    </div>
+
+    <div id="main_question">
+        <div id="payoff_matrix">
+            <div class="card">
+                <div class="card_body">
+                    <p>取引におけるあなたと相手の選択によって、以下の利得が得られます。</p>
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col" rowspan="2" colspan="2" class="align-middle"></th>
+                                <th scope="col" colspan="2" >あなたの選択</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">C</th>
+                                <th scope="col">D</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                 <th scope="row" rowspan="2" class="align_middle">相手の選択</th>
+                                 <th scope="row">C</th>
+                                 <td>あなた: {{payoff_CC.0}}, 相手: {{payoff_CC.1}}</td>
+                                 <td>あなた: {{payoff_DC.0}}, 相手: {{payoff_DC.1}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">D</th>
+                                <td>あなた: {{payoff_CD.0}}, 相手: {{payoff_CD.1}}</td>
+                                <td>あなた: {{payoff_DD.0}}, 相手: {{payoff_DD.1}}</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div id="coop_defect">
+            <p>
+            あなたの行動を選んでください。
+            </p>
+            <button 
+            type="button" 
+            onclick="
+            send_decision(true); 
+            switch_display(); "
+            id="coop_button"
+            >
+                C
+            </button>
+            <button 
+            type="button"
+            onclick="
+            send_decision(false);
+            switch_display(); "
+            id="defect_button">
+                D
+        </button>
+
+        </div>
+    </div>
+   
+    <div id="waiting_opponent">
+        <p>相手の選択を待っています</p>
+    </div>
+    <div id="main_result">
+        <h3>取引結果</h3>
+        <p>
+            あなたが今回の取引で得たのは<span id="payoff"></span>ptでした。
+        </p>
+        <p>
+            あなたの行動: <span id="player_decision"></span>
+        </p>
+        <p>
+            相手の行動: <span id="opponent_decision"></span>
+        </p>
+
+        {{ next_button }}
+    </div>
+
+    
+</body>
+
+<script>
+    {{ if player.is_rematched == 1 }} 
+        document.getElementById('new_comer').style.display = "block";
+    {{ else }}
+        document.getElementById('old_friend').style.display = "block";
+    {{ endif }}
+
+    function send_decision(decision) {
+        if (decision == true) {
+            liveSend({'decision_pd': 1})
+        }
+        if (decision == false) {
+            liveSend({'decision_pd': 0})
+        }
+    }
+
+    function switch_display() {
+        document.getElementById('main_question').style.display = "none";
+        document.getElementById('waiting_opponent').style.display = "block";
+    }
+
+    function liveRecv(data) {
+        console.log(data)
+        let {payoff, player_decision, opponent_decision} = data;
+        console.log("なんかきた", payoff)
+        document.getElementById('payoff').innerText = payoff;
+        document.getElementById('player_decision').innerText = player_decision;
+        document.getElementById('opponent_decision').innerText = opponent_decision;
+        document.getElementById('waiting_opponent').style.display = "none";
+        document.getElementById('main_result').style.display = "block";
+
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        liveSend({});
+    });
+
+</script>
+
+{{ endblock }}

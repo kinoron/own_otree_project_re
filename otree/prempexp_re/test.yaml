@@ -1,0 +1,61 @@
+# 相互協力の利益固定
+round1:
+  (True, True): [100, 100] 
+  (True, False): [-500, 600]
+  (False, True): [600, -500]
+  (False, False): [0, 0]
+round2:
+  (True, True): [100, 100] 
+  (True, False): [-450, 550]
+  (False, True): [550, -450]
+  (False, False): [0, 0]
+round3:
+  (True, True): [100, 100] 
+  (True, False): [-400, 500]
+  (False, True): [500, -400]
+  (False, False): [0, 0]
+round4:
+  (True, True): [100, 100] 
+  (True, False): [-350, 450]
+  (False, True): [450, -350]
+  (False, False): [0, 0]
+round5:
+  (True, True): [100, 100] 
+  (True, False): [-300, 400]
+  (False, True): [400, -300]
+  (False, False): [0, 0]
+round6:
+  (True, True): [100, 100] 
+  (True, False): [-250, 350]
+  (False, True): [350, -250]
+  (False, False): [0, 0]
+round7:
+  (True, True): [100, 100] 
+  (True, False): [-200, 300]
+  (False, True): [300, -200]
+  (False, False): [0, 0]
+round8:
+  (True, True): [100, 100] 
+  (True, False): [-150, 250]
+  (False, True): [250, -150]
+  (False, False): [0, 0]
+round9:
+  (True, True): [100, 100] 
+  (True, False): [-100, 200]
+  (False, True): [200, -100]
+  (False, False): [0, 0]
+round10:
+  (True, True): [100, 100] 
+  (True, False): [-50, 150]
+  (False, True): [150, -50]
+  (False, False): [0, 0]
+round11:
+  (True, True): [100, 100] 
+  (True, False): [-25, 125]
+  (False, True): [125, -25]
+  (False, False): [0, 0]
+round12:
+  (True, True): [100, 100] 
+  (True, False): [-10, 100]
+  (False, True): [110, -10]
+  (False, False): [0, 0]

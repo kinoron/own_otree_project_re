@@ -1,0 +1,17 @@
+{{ block title }}
+最終結果
+{{ endblock }}
+
+{{ block content }}
+<style>
+    #result {
+        font-size: large;
+    }
+</style>
+<body>
+    <p>すべての取引が終了しました。全取引を通じてあなたが得たのは、 
+        <span id="result"> {{cumulative_payoff}} </span> 
+        でした。
+    </p>
+</body>
+{{ endblock }}
